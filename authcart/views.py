@@ -15,6 +15,8 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 
 # Create your views here.
+def home(request):
+    return render ("signup.html")
 def signup(request):
     if request.method == "POST":
         email = request.POST["email"]

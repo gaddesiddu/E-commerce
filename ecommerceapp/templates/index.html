@@ -4,8 +4,11 @@
      /* Set the maximum height */
           /* Allow the image to shrink to fit the max-height */
     margin: 0 auto;    /* Center the image horizontally */
-    display: block;    /* Ensure the image is treated as a block element */
+    display: block; 
+       /* Ensure the image is treated as a block element */
+  
   }
+  
 </style>
 
 <!-- Your Django template code -->
@@ -108,25 +111,26 @@
   
     updatePopover(cart);
     function updatePopover(cart) {
-  
-        
-        console.log('we are  inside update popover');
-        
-        var popStr = "";
-        var popStr = popStr + "<h5> cart for your items in my shopping cart </h5> <div class='mx-2 my-2'>";
-        var i = 1;
-        for (var item in cart) {
-            popStr = popStr + "<b>" + i + "</b>. ";
-            popStr = popStr + cart[item][1] + ": <b>" +cart[item][0] + "</b> Qty"  + '<br>';
-
-            i = i + 1;
-        }
-  
-        popStr = popStr + "</div> <a href='/checkout'><button class='btn btn-success' id='clearCart'>Checkout</button></a>  <button class='btn btn-dark' onclick='clearCart()' id='clearCart'>ClearCart</button>"
-        document.getElementById('popcart').setAttribute('data-content', popStr);
-        $('#popcart').popover('show');
-        document.getElementById("popcart").click();
+    console.log('we are inside update popover');
+    
+    var popStr = "";
+    popStr += "<h5>Your items</h5> <div class='mx-2 my-2'>";
+    var i = 1;
+    for (var item in cart) {
+        popStr += "<b>" + i + "</b>. ";
+        popStr += cart[item][1] + ": <b>" + cart[item][0] + "</b> Qty"  + '<br>';
+        i = i + 1;
     }
+
+    popStr += "</div> <div class='d-flex justify-content-end mt-2'>";
+    popStr += "<a href='/checkout' class='btn btn-success mx-1' id='checkout'>Checkout</a>";
+    popStr += "<button class='btn btn-dark mx-1' onclick='clearCart()' id='clearCart'>ClearCart</button></div>";
+
+    document.getElementById('popcart').setAttribute('data-content', popStr);
+    $('#popcart').popover('show');
+    document.getElementById("popcart").click();
+}
+
   
     function clearCart() {
         cart = JSON.parse(localStorage.getItem('cart'));
